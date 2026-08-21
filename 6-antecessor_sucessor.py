@@ -13,5 +13,6 @@ sucessor = numero + 1
 
 
 print('EXIBINDO NUMERO')
+print('numero: ', numero)
 print('numero antecessor: ', antecessor)
 print('numero sucessor: ', sucessor)
