@@ -31,5 +31,4 @@ else:
 # saida
 print('\n= EXIBINDO DADOS')
 print(f'soma:  {soma}')
-print(f'media:  {media})
-
+print(f'media:  {media}')
