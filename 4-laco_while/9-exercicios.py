@@ -23,7 +23,7 @@ while True:
 
 total_numeros = pares + impares
 
-print(f'Quantidade de pares: {pares}')
+print(f'\nQuantidade de pares: {pares}')
 print(f'Quantidades de impares: {impares}')
 if pares > 0:
     media_pares = soma_pares / pares

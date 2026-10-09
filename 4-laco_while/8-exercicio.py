@@ -17,6 +17,6 @@ while True:
 
 if quantidade > 0:
     media = soma / quantidade
-    print(f'A média aritmética dos {quantidade} números digitados é: {media}')
+    print(f'\nA média aritmética dos {quantidade} números digitados é: {media}')
 else:
     print('Nenhum número positivo foi digitado.')
