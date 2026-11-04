@@ -42,10 +42,10 @@ while True:
         case 3:
             # Update ( Atualizar )
             print("- Atualizar Produto - ")
-            nome = input("Qual produto deseja Atualizar? ")
+            nome = input("Qual produto deseja Atualizar? ").strip().upper()
             if nome in lista_produtos:
                 posicao = lista_produtos.index(nome)
-                novo = input("Novo nome: ")
+                novo = input("Novo nome: ").strip().upper()
                 lista_produtos[posicao] = novo
                 print("Produto Alterado com Sucesso!")
             else:

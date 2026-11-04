@@ -37,7 +37,7 @@ while True:
 
         case 3:
             print('\n== ATUALIZAR  PACIENTE ==')
-            nome = str(input('Qual paciente deseja atualizar? '))
+            nome = str(input('Qual paciente deseja atualizar? ')).strip().upper()
             if nome in lista_paciente:
                 posicao = lista_paciente.index(nome)
                 novo = input('Novo nome: ')
@@ -58,7 +58,7 @@ while True:
             print("\n== Encontrar Paciente ==")
             numero = input("Qual Paciente Deseja Encontrar? ")
             for i, paciente in enumerate(lista_paciente):
-                print(f'{i+1}. {lista_paciente[i]}')
+                print(f' {lista_paciente[i]}')
 
         case 0:
             print('Saindo do programa...')
