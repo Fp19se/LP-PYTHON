@@ -20,7 +20,7 @@ while True:
     match opcao:
         case 1:
             print('\n== CADASTRAR PACIENTE ==')
-            nome_paciente = str(input('Digite o nome completo do paciente do paciente: ')).strip().upper()
+            nome_paciente = str(input('Digite o nome completo do paciente: ')).strip().upper()
             if nome_paciente == '':
                 print('\nO nome do paciente deve ser inserido...')
             elif nome_paciente in lista_paciente:
