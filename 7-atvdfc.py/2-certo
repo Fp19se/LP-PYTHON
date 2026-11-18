@@ -1,0 +1,122 @@
+import os
+os.system("cls")
+import time
+
+def autenticar():
+    matricula_certa = "1234"
+    senha_certa = "1234"
+
+    while True:
+        matricula = input("Digite sua matricula: ")
+        senha = input("Digite sua senha: ")
+
+        if matricula == matricula_certa and senha == senha_certa:
+            print("Acesso liberado!\n")
+            return matricula
+        else:
+            print("Matricula ou senha errada. Tente de novo!\n")
+            time.sleep(2)
+            os.system('cls')
+
+def calcular_inss(salario_base):
+    if salario_base <= 1621.00:
+        inss = salario_base * 0.075
+    elif salario_base <= 2902.84:
+        inss = 121.575 + (salario_base - 1621.00) * 0.09
+    elif salario_base <= 4354.27:
+        inss = 236.9406 + (salario_base - 2902.84) * 0.12
+    elif salario_base <= 8475.55:
+        inss = 411.1122 + (salario_base - 4354.27) * 0.14
+    else:
+        inss = 988.10
+    return inss
+
+def calcular_irrf(salario_base, inss, dependentes):
+    base = salario_base - inss - dependentes * 189.59
+
+    if base <= 2428.80:
+        imposto = 0
+    elif base <= 2826.65:
+        imposto = base * 0.075 - 182.16
+    elif base <= 3751.05:
+        imposto = base * 0.15 - 394.16
+    elif base <= 4664.68:
+        imposto = base * 0.225 - 675.49
+    else:
+        imposto = base * 0.275 - 908.73
+
+    if imposto < 0:
+        imposto = 0
+
+
+    if salario_base <= 5000.00:
+        imposto = 0
+    elif salario_base <= 7350.00:
+        reducao = 978.62 - 0.133145 * salario_base
+        imposto = imposto - reducao
+        if imposto < 0:
+            imposto = 0
+
+    return imposto
+
+def calcular_vt(salario_base, usa_vt):
+    if usa_vt == "s":
+        return salario_base * 0.06
+    else:
+        return 0
+
+def calcular_vr(valor_vr):
+    return valor_vr * 0.20
+
+def calcular_plano_saude(dependentes):
+    return dependentes * 150
+
+def mostrar_contracheque(matricula, salario_base, inss, irrf, vt, vr, plano, usa_vt, valor_vr):
+    total = inss + irrf + vt + vr + plano
+    liquido = salario_base - total
+
+    print("\nCONTRACHEQUE - MATRICULA", matricula)
+    print("Salario base R$ %.2f" % salario_base)
+    print("(-) INSS R$ %.2f" % inss)
+    print("(-) IRRF R$ %.2f" % irrf)
+    print("(-) Vale-transporte R$ %.2f" % vt)
+    print("(-) Vale-refeicao R$ %.2f" % vr)
+    print("(-) Plano de saude R$ %.2f" % plano)
+    print("-----------------------------------")
+    print("Total de descontos R$ %.2f" % total)
+    print("SALARIO LIQUIDO R$ %.2f" % liquido)
+    print("-----------------------------------")
+    print("Beneficios: VT =", usa_vt, "| VR informado = R$ %.2f" % valor_vr)
+
+def programa():
+    matricula = autenticar()
+
+    salario_base = float(input("Digite o salario base: "))
+    while salario_base <= 0:
+        print("Salario tem que ser maior que zero.")
+        salario_base = float(input("Digite o salario base: "))
+
+    dependentes = int(input("Digite o numero de dependentes: "))
+    while dependentes < 0:
+        print("Dependentes nao pode ser negativo.")
+        dependentes = int(input("Digite o numero de dependentes: "))
+
+    usa_vt = input("Usa vale-transporte? (s/n): ").lower()
+    while usa_vt != "s" and usa_vt != "n":
+        print("Responda so com 's' ou 'n'.")
+        usa_vt = input("Usa vale-transporte? (s/n): ").lower()
+
+    valor_vr = float(input("Digite o valor do VR da empresa: "))
+    while valor_vr < 0:
+        print("Valor do VR nao pode ser negativo.")
+        valor_vr = float(input("Digite o valor do VR da empresa: "))
+
+    inss = calcular_inss(salario_base)
+    irrf = calcular_irrf(salario_base, inss, dependentes)
+    vt = calcular_vt(salario_base, usa_vt)
+    vr = calcular_vr(valor_vr)
+    plano = calcular_plano_saude(dependentes)
+
+    mostrar_contracheque(matricula, salario_base, inss, irrf, vt, vr, plano, usa_vt, valor_vr)
+
+programa()
